@@ -38,6 +38,7 @@ bidding_document_generator/
 
 - **src 目录**：
     - `__init__.py`：使 `src` 目录成为一个 Python 包。
+    - `multi_threaded_file_preprocessor.py`：负责实现多线程处理大批量文件，包括格式识别、解析以及预处理。
     - `nlp_model_integration.py`：负责自然语言处理模型的集成、微调及多模型融合。
     - `knowledge_graph_construction.py`：实现知识图谱的构建和查询。
     - `template_management.py`：处理模板的管理和自动化填充。
