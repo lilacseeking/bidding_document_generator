@@ -5,7 +5,7 @@ from src.template_management import fill_template
 
 def main():
     # 初始化 NLP 模型集成
-    nlp_integration = NLPModelIntegration(api_key="YOUR_OPENAI_API_KEY")
+    nlp_integration = NLPModelIntegration(api_key="YOUR-API-KEY")
     # 微调模型
     nlp_integration.fine_tune_model('../data/bidding_data.csv')
     
