@@ -37,6 +37,7 @@ bidding_document_generator/
     - 包含各种招投标文件的模板，如招标文件、评标报告、答疑函件、中标通知书等的模板文件。模板使用JSON格式存储，其中包含占位符，方便后续填充。
 
 - **src 目录**：
+    - 包含项目中的所有代码实现，包括文件处理，自然语言处理，知识图谱和模型的管理和自动填充
     - `__init__.py`：使 `src` 目录成为一个 Python 包。
     - `multi_threaded_file_preprocessor.py`：负责实现多线程处理大批量文件，包括格式识别、解析以及预处理。
     - `nlp_model_integration.py`：负责自然语言处理模型的集成、微调及多模型融合。
