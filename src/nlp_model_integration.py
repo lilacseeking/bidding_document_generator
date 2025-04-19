@@ -1,4 +1,8 @@
 import openai
+import pandas as pd
+import csv
+import json
+import os
 from langchain.chains.llm import LLMChain
 from langchain_community.llms.openai import OpenAI
 from langchain_core.prompts import PromptTemplate
@@ -20,6 +24,7 @@ class NLPModelIntegration:
             ('tfidf', TfidfVectorizer()),
             ('nb', MultinomialNB())
         ])
+        self.client = OpenAI()  # 初始化 OpenAI client
         # 这里假设已经有训练数据 X_train, y_train
         # self.statistical_pipeline.fit(X_train, y_train)
 
@@ -41,16 +46,19 @@ class NLPModelIntegration:
 
 
     def fine_tune_model(self, training_data_path):
+        # 0. 将训练文件修改为jsonl格式
+        jsonl_path  = self.convert_csv_to_jsonl(training_data_path, training_data_path.replace('.csv', '.jsonl'))
+
         # 1. 上传训练文件
-        training_file = self.client.files.create(
-            file=open(training_data_path, "rb"),
+        training_file = openai.files.create(
+            file=open(jsonl_path, "rb"),
             purpose="fine-tune"
         )
 
         # 2. 创建微调任务
-        fine_tuning_job = self.client.fine_tuning.jobs.create(
+        fine_tuning_job = openai.fine_tuning.jobs.create(
             training_file=training_file.id,
-            model="gpt-3.5-turbo-0613",  # 使用有效模型标识
+            model="gpt-3.5-turbo",  # 使用有效模型标识
             hyperparameters={
                 "n_epochs": 3  # 可自定义训练轮次
             }
@@ -59,6 +67,33 @@ class NLPModelIntegration:
         # 3. 更新模型ID（需异步获取）
         self.llm = fine_tuning_job.fine_tuned_model
 
+    def convert_csv_to_jsonl(self,csv_file_path, jsonl_file_path=None):
+        """
+        将 CSV 文件转换为 JSONL 格式文件。
+
+        参数：
+            csv_file_path: CSV 文件的路径
+            jsonl_file_path: （可选）生成的 JSONL 文件路径。如果不传入，则默认在同一目录下，文件名和 CSV 文件一致，只是扩展名变为 .jsonl
+        返回值：
+            生成的 JSONL 文件的路径
+        """
+        if jsonl_file_path is None:
+            base_name = os.path.splitext(csv_file_path)[0]
+            jsonl_file_path = base_name + ".jsonl"
+
+        with open(csv_file_path, mode="r", encoding="utf-8") as fin, \
+                open(jsonl_file_path, mode="w", encoding="utf-8") as fout:
+            reader = csv.DictReader(fin)
+            for row in reader:
+                # 这里将 CSV 中 original_text 和 annotated_text 字段转换为 JSONL 格式的 prompt 和 completion
+                data = {
+                    "prompt": row["original_text"],
+                    "completion": row["annotated_text"]
+                }
+                json_line = json.dumps(data, ensure_ascii=False)
+                fout.write(json_line + "\n")
+
+        return jsonl_file_path
 
     def combine_models_outputs(self, input_text):
         rule_based_output = self.rule_based_generation(input_text)

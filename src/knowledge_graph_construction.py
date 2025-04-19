@@ -10,10 +10,23 @@ class KnowledgeGraphConstruction:
         with self.driver.session() as session:
             session.run(f"CREATE (n:{label} $props)", props=properties)
 
-    def create_relationship(self, node1_label, node1_id, rel_type, node2_label, node2_id):
+    def create_relationship(self, start_label: str, start_id: int,
+                            rel_type: str, end_label: str, end_id: int):
+        """创建关系方法（支持中文关系类型）"""
+        # 使用f-string直接插入关系类型名称
+        cypher = f"""
+        MATCH (a:{start_label} {{id: $start_id}}), 
+              (b:{end_label} {{id: $end_id}})
+        MERGE (a)-[:`{rel_type}`]->(b)
+        """
+        # 注意：反引号`用于处理特殊字符
+
+        parameters = {
+            "start_id": start_id,
+            "end_id": end_id
+        }
         with self.driver.session() as session:
-            session.run(f"MATCH (a:{node1_label} {{id: $id1}}), (b:{node2_label} {{id: $id2}}) "
-                        "CREATE (a)-[r:{rel_type}]->(b)", id1=node1_id, id2=node2_id, rel_type=rel_type)
+            session.run(cypher, parameters)
 
     def build_graph(self):
         laws_df = pd.read_csv('../data/laws.csv')
@@ -32,7 +45,7 @@ class KnowledgeGraphConstruction:
 
         # 创建招标项目与投标方的参与关系
         for index, row in project_cases_df.iterrows():
-            self.create_node("招标项目", row["project_id"], "参与", "投标方", row["supplier_id"])
+            self.create_relationship("招标项目", row["project_id"], "参与", "投标方", row["bidder_id"])
 
     def query_graph(self, query):
         with self.driver.session() as session:

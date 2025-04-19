@@ -8,10 +8,10 @@ pandas~=2.2.3
 nltk~=3.9.1
 filetype~=1.2.0
 PyPDF2~=3.0.1
-tabula~=1.0.5
-docx~=0.2.4
+tabula-py
+beautifulsoup4
+python-docx
 bs4~=0.0.2
-beautifulsoup4~=4.13.3
 py2neo~=2021.2.4
 sklearn-crfsuite~=0.5.0
 transformers~=4.51.2
