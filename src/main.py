@@ -2,12 +2,13 @@ from src.nlp_model_integration_aliyun import NLPModelIntegrationAliyun
 from src.nlp_model_integration import NLPModelIntegration
 from src.knowledge_graph_construction import KnowledgeGraphConstruction
 from src.template_management import fill_template
+import os
 
 
 def main():
     # 初始化 NLP 模型集成
     # nlp_integration = NLPModelIntegration(api_key="YOUR_API_KEY")
-    nlp_integration = NLPModelIntegrationAliyun(access_key_secret="YOUR_API_KEY")
+    nlp_integration = NLPModelIntegrationAliyun(access_key_secret= os.getenv("ALIYUN_API_KEY", "YOUR_API_KEY"))
     # 微调模型
     nlp_integration.fine_tune_model('../data/bidding_data.csv')
     
