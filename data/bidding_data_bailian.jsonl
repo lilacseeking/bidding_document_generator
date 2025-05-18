@@ -1,0 +1,55 @@
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"医疗设备采购项目的资格预审截止日期？"},{"role":"assistant","content":"本项目资格预审截止时间为2024年8月15日，投标方需提供医疗器械注册证等资质文件。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"环保公司D的污水处理方案是否符合ISO 14001？"},{"role":"assistant","content":"经环境工程专家评审，该方案已通过环境管理体系认证，满足标准要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"数据中心冷却系统招标的技术参数？"},{"role":"assistant","content":"需满足ANSI/TIA-942标准，PUE值≤1.5，提供五年运维服务承诺。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"网络安全公司G的等保三级认证状态？"},{"role":"assistant","content":"投标方已取得公安部等保三级认证，证书编号：GX-2024-00321。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"《政府采购法》对服务类项目的评分标准？"},{"role":"assistant","content":"根据第二十二条要求，技术评分占比不低于60%，价格分采用低价优先法。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"建筑公司A的施工进度计划是否合规？"},{"role":"assistant","content":"经项目管理专家审核，关键路径安排符合GB/T 50319-2013第5.4条款。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"软件开发项目的功能测试验收标准？"},{"role":"assistant","content":"需通过ISTQB认证测试，缺陷率≤0.5%，提供UAT测试报告。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"绿化工程招标的质保期要求？"},{"role":"assistant","content":"按《园林绿化条例》要求，种植工程质保期不少于12个月。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"专家丙对智能化系统方案的评审意见？"},{"role":"assistant","content":"确认方案满足GB 50348-2018安全防范工程技术规范要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"IT设备采购的付款进度安排？"},{"role":"assistant","content":"合同签订后支付30%，验收合格付60%，质保期满付10%。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"实验室设备招标是否需要CE认证？"},{"role":"assistant","content":"依据欧盟医疗器械法规，涉及电磁兼容性的设备必须提供CE认证。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"道路施工项目的交工验收流程？"},{"role":"assistant","content":"按《公路工程竣（交）工验收办法》执行，需提供第三方检测报告。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"投标保证金退还时间规定？"},{"role":"assistant","content":"根据招标文件第8.3条，未中标方保证金在公示期结束后5个工作日内退还。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"服务器采购项目的质保期要求？"},{"role":"assistant","content":"整机三年质保，关键部件（含硬盘）五年质保，响应时间≤4小时。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"医疗影像设备的技术服务要求？"},{"role":"assistant","content":"需提供DICOM 3.0接口，支持HL7协议，定期校准服务每季度一次。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"电梯采购安装项目的验收标准？"},{"role":"assistant","content":"符合TSG T7001-2023电梯监督检验规程，提供特种设备使用登记证。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"专家甲对钢结构方案的评估结论？"},{"role":"assistant","content":"抗震性能满足GB 50011-2019要求，焊缝检测合格率100%。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"智能化系统招标的接口协议要求？"},{"role":"assistant","content":"支持Modbus TCP/IP、BACnet协议，提供SDK开发工具包。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"装修工程环保检测标准是什么？"},{"role":"assistant","content":"室内空气质量需达到GB/T 18883-2022 II类民用建筑工程要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"网络安全等级保护2.0的定级要求？"},{"role":"assistant","content":"根据信息系统受损客体和程度，本项目应定为第三级保护等级。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"危化品仓库建设的消防验收标准？"},{"role":"assistant","content":"需符合GB 50016-2023建筑设计防火规范第3.6章节特殊建筑要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"光伏电站项目的并网验收流程？"},{"role":"assistant","content":"取得电力业务许可证，通过GB/T 19964-2022光伏发电站接入电力系统技术规定测试。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"专家戊对应急预案的评审意见？"},{"role":"assistant","content":"应急响应时间符合AQ/T 9002-2019要求，建议补充现场处置方案。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"实验室家具的甲醛释放限值？"},{"role":"assistant","content":"依据GB 18580-2017，甲醛释放量≤0.124mg/m³。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"空调系统招标的能效比要求？"},{"role":"assistant","content":"冷水机组COP≥6.0，末端设备噪声≤45dB(A)，符合GB 50189-2023标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"建筑信息模型（BIM）交付标准？"},{"role":"assistant","content":"按GB/T 51301-2023建筑信息模型交付标准执行，LOD等级达到400。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"安防监控系统的存储周期要求？"},{"role":"assistant","content":"重要区域视频保存≥90天，符合GB 50348-2018第6.3.4条要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"医疗器械注册证的有效期验证？"},{"role":"assistant","content":"经国家药监局官网核验，注册证编号2024-03-001有效期至2029年3月。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"钢结构防火涂料施工标准？"},{"role":"assistant","content":"耐火极限≥2小时，符合GB 14907-2018钢结构防火涂料通用技术条件。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"洁净室工程的粒子浓度标准？"},{"role":"assistant","content":"静态测试≥0.5μm粒子浓度≤3520个/m³，达到ISO 14644-1 Class 7级。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"雨水收集系统的处理标准？"},{"role":"assistant","content":"出水水质达到GB/T 18920-2022城市污水再生利用城市杂用水水质标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"电子招投标平台对接要求？"},{"role":"assistant","content":"支持webservice接口，符合《电子招标投标办法》数据交换标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"幕墙工程四性检测包含哪些？"},{"role":"assistant","content":"气密性、水密性、抗风压性能及平面变形性能检测，依据GB/T 15227-2019。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"手术室净化空调验收标准？"},{"role":"assistant","content":"符合GB 50333-2023医院洁净手术部建筑技术规范第7.3条温湿度控制要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"特种设备安装资质要求？"},{"role":"assistant","content":"提供TSG 07-2023特种设备生产和充装单位许可规则规定的安装许可证。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"消防设施维护保养周期？"},{"role":"assistant","content":"每月检查灭火器压力，每季度测试报警系统，每年全面检测并出具报告。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"专家庚对智能照明方案的评审？"},{"role":"assistant","content":"系统兼容DALI协议，节能率≥40%，满足JGJ/T 163-2023建筑照明设计标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"实验室通风柜面风速标准？"},{"role":"assistant","content":"操作窗口平均面风速0.4-0.6m/s，符合JG/T 385-2012实验室设备通用技术条件。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"建筑隔震支座检测要求？"},{"role":"assistant","content":"提供第三方机构出具的100万次疲劳性能试验报告，符合GB 20688.3-2007。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"污水处理项目的排放标准？"},{"role":"assistant","content":"出水COD≤50mg/L，氨氮≤5mg/L，达到GB 18918-2023一级A标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"手术室医用气体验收标准？"},{"role":"assistant","content":"终端压力误差≤10%，报警响应时间≤5秒，符合YY/T 0799-2023要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"机房UPS电池续航时间？"},{"role":"assistant","content":"满载情况下后备时间≥30分钟，符合GB 7260.1-2023不间断电源设备标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"建筑隔声设计的验收指标？"},{"role":"assistant","content":"卧室夜间噪声≤35dB，楼板撞击声压级≤75dB，符合GB 50118-2023民用建筑隔声设计规范。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"电梯无障碍设计要求？"},{"role":"assistant","content":"轿厢深度≥1.4米，配备盲文按钮和语音报站，符合GB 50763-2023无障碍设计规范。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"洁净室压差控制标准？"},{"role":"assistant","content":"不同级别洁净区间压差≥10Pa，与非洁净区压差≥15Pa，依据GB 50472-2023。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"光伏组件衰减率保证？"},{"role":"assistant","content":"首年衰减≤2%，后续每年≤0.7%，25年总衰减≤20%，符合IEC 61215标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"抗震支架的检测报告要求？"},{"role":"assistant","content":"提供国家建材检测中心出具的循环加载测试报告，满足GB/T 37267-2023要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"智能停车系统的验收标准？"},{"role":"assistant","content":"单车存取时间≤120秒，故障率≤0.5%，符合JGJ/T 326-2023机械式停车库技术规范。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"实验室生物安全柜等级？"},{"role":"assistant","content":"二级生物安全柜，符合YY 0569-2023 II级A2型标准，提供第三方检测报告。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"厨房设备防爆认证要求？"},{"role":"assistant","content":"燃气设备需具备ATEX防爆认证，电气设备防护等级IP55以上。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"污水处理项目的污泥处置标准？"},{"role":"assistant","content":"污泥含水率≤60%，符合CJ/T 249-2023城镇污水处理厂污泥处置标准。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"手术室洁净度检测方法？"},{"role":"assistant","content":"采用粒子计数器在静态条件下检测，符合GB 50333-2023附录A规定。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"建筑幕墙耐撞击性能指标？"},{"role":"assistant","content":"30kg软体重物撞击后无破损，符合GB/T 38264-2023建筑幕墙抗冲击性能试验方法。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"实验室气瓶间安全距离要求？"},{"role":"assistant","content":"可燃气体储瓶间距建筑物≥15米，符合GB 50016-2023第4.3.1条要求。"}]}
+{"messages":[{"role":"system","content":"您是企业招标文档处理助手"},{"role":"user","content":"光伏逆变器转换效率要求？"},{"role":"assistant","content":"最大效率≥98.6%，欧洲效率≥97.8%，符合NB/T 32004-2023光伏并网逆变器技术规范。"}]}

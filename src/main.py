@@ -1,3 +1,4 @@
+from src.nlp_model_integration_aliyun import NLPModelIntegrationAliyun
 from src.nlp_model_integration import NLPModelIntegration
 from src.knowledge_graph_construction import KnowledgeGraphConstruction
 from src.template_management import fill_template
@@ -5,7 +6,8 @@ from src.template_management import fill_template
 
 def main():
     # 初始化 NLP 模型集成
-    nlp_integration = NLPModelIntegration(api_key="YOUR_OPENAI_API_KEY")
+    # nlp_integration = NLPModelIntegration(api_key="YOUR_API_KEY")
+    nlp_integration = NLPModelIntegrationAliyun(access_key_secret="YOUR_API_KEY")
     # 微调模型
     nlp_integration.fine_tune_model('../data/bidding_data.csv')
     
@@ -30,7 +32,7 @@ def main():
     filled_template = fill_template('../templates/bidding_template.json', data)
 
     # 生成最终文件
-    final_document = nlp_integration.combine_models_outputs(filled_template)
+    final_document = nlp_integration.combine_models_outputs(filled_template,nlp_integration.fine_tuned_model_id)
     print(final_document)
 
 
