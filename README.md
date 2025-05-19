@@ -1,4 +1,8 @@
 # bidding_document_generator
+
+### 项目描述
+该系统深度融合前沿人工智能技术，能精准、高效地生成招标文件、标书、专家评标报告、答疑函件、中标通知书等各类文件。
+
 ### 项目结构
 ```
 bidding_document_generator/
