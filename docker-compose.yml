@@ -1,30 +1,107 @@
+# 使用Docker Compose文件格式版本3.8
+version: '3.8'
+
 services:
-  app:
-    build: .
-    container_name: bidding_document_generator-app
+  # 前端服务
+  frontend:
+    build:
+      # 指定构建上下文为frontend目录
+      context: ./frontend
+      # 指定Dockerfile路径
+      dockerfile: Dockerfile
+    ports:
+      # 映射80端口到宿主机
+      - "80:80"
+    # 确保后端服务启动后再启动前端
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 后端服务
+  backend:
+    build:
+      # 指定构建上下文为backend目录
+      context: ./backend
+      # 指定Dockerfile路径
+      dockerfile: Dockerfile
+    ports:
+      # 映射8000端口到宿主机
+      - "8000:8000"
+    # 环境变量配置
     environment:
-      # 如有需要自行添加代理或其他环境变量
-      - PYTHONPATH=/app
+      # 数据库配置
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bidding_doc
+      # Neo4j配置
       - NEO4J_URI=bolt://neo4j:7687
       - NEO4J_USER=neo4j
       - NEO4J_PASSWORD=password
-      - ALIYUN_API_KEY=your_api_key
-    ports:
-      - "8000:8000"  # 如果你的 Flask/FastAPI 等服务监听8000端口，可调整
+    # 确保数据库和Neo4j服务启动后再启动后端
     depends_on:
-      - neo4j
-    volumes:
-      - .:/app  # 如不希望本地代码覆盖容器代码可去掉
-  neo4j:
-    image: neo4j:5.19.0-community
-    container_name: bidding_document_generator-neo4j
+      db:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL数据库服务
+  db:
+    # 使用PostgreSQL 15的Alpine版本，体积更小
+    image: postgres:15-alpine
     environment:
-      - NEO4J_AUTH=neo4j/password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bidding_doc
+    # 数据持久化
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "7474:7474"   # Neo4j 浏览器 Web
-      - "7687:7687"   # Neo4j Bolt 协议
+      # 映射5432端口到宿主机
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Neo4j图数据库服务
+  neo4j:
+    # 使用Neo4j 5.13.0版本
+    image: neo4j:5.13.0
+    environment:
+      # 设置Neo4j认证信息
+      - NEO4J_AUTH=neo4j/password
+    # 数据持久化
     volumes:
       - neo4j_data:/data
+      - neo4j_logs:/logs
+    ports:
+      # 映射Neo4j HTTP接口
+      - "7474:7474"
+      # 映射Neo4j Bolt协议接口
+      - "7687:7687"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:7474"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
+# 定义持久化卷
 volumes:
+  # PostgreSQL数据卷
+  postgres_data:
+  # Neo4j数据卷
   neo4j_data:
+  # Neo4j日志卷
+  neo4j_logs:

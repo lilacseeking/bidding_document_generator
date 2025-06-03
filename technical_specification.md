@@ -106,6 +106,20 @@ NLP处理模块提供文本分析能力，包括实体识别、关系抽取、�
 ##### 文档管理模块
 文档管理模块提供各类文档的管理功能，包括标书、专家评估报告、答疑函件、中标通知书的CRUD操作和在线预览功能。
 
+### 2.3 文档管理功能
+
+#### 标书管理
+标书管理模块提供全面的标书管理功能。在列表查询方面，支持多条件筛选、排序和分页功能，方便用户快速定位所需标书。文档预览功能支持在线预览和下载，确保用户可以便捷地查看标书内容。系统提供完整的CRUD操作，包括创建、读取、更新和删除标书。版本控制功能确保标书的历史版本可追溯，状态管理功能则支持草稿、待审核、已发布等多种状态的管理。
+
+#### 专家评估报告
+专家评估报告模块提供专业的报告管理功能。列表查询支持按项目、专家、时间等条件进行灵活查询。报告预览功能支持在线预览和PDF导出，方便用户查看和分享。系统提供完整的CRUD操作，支持报告的创建、编辑和删除。评分管理功能支持多维度评分，意见管理功能则帮助收集和整理专家意见。
+
+#### 答疑函件
+答疑函件模块提供高效的函件管理功能。列表查询支持按项目、时间、状态进行查询，方便用户追踪函件处理进度。函件预览功能支持在线预览和打印，确保函件内容清晰可读。系统提供完整的CRUD操作，支持函件的创建、回复和归档。流程管理功能确保函件处理流程规范，通知管理功能则自动通知相关方。
+
+#### 中标通知书
+中标通知书模块提供规范的通知书管理功能。列表查询支持按项目、中标单位进行查询，方便用户管理通知书。通知书预览功能支持在线预览和打印，确保通知书格式规范。系统提供完整的CRUD操作，支持通知书的创建、编辑和发送。模板管理功能支持多种通知书模板，发送管理功能则支持邮件、短信等多种通知方式。
+
 ## 3. 业务架构
 
 ### 3.1 系统架构图
@@ -160,6 +174,7 @@ graph TD
 | 前端层 | Vue.js 3.0 | 构建响应式用户界面 |
 | 应用层 | Python FastAPI | 提供高性能API服务 |
 | 数据层 | Neo4j 5.18.0 | 图数据库，存储知识图谱 |
+| 数据层 | PostgreSQL 15.0 | 关系型数据库，存储业务数据 |
 | 存储层 | 阿里云OSS | 对象存储服务 |
 | AI服务 | 阿里云NLP | 提供NLP能力 |
 
@@ -179,6 +194,7 @@ graph LR
     subgraph 数据技术栈
         C1[Neo4j] --> C2[Redis]
         C2 --> C3[OSS]
+        C4[PostgreSQL] --> C2
     end
     
     subgraph AI技术栈
@@ -188,11 +204,13 @@ graph LR
     
     A3 --> B1
     B3 --> C1
+    B3 --> C4
     B3 --> D1
     
     style A1 fill:#f9f,stroke:#333,stroke-width:2px
     style B1 fill:#bbf,stroke:#333,stroke-width:2px
     style C1 fill:#bfb,stroke:#333,stroke-width:2px
+    style C4 fill:#bfb,stroke:#333,stroke-width:2px
     style D1 fill:#fbb,stroke:#333,stroke-width:2px
 ```
 
@@ -242,46 +260,128 @@ erDiagram
 | Document | content | string | 文档内容 | "招标文件正文" |
 | Document | metadata | string | 文档元数据 | {"createTime": "2024-03-20"} |
 
-### 4.2 模板模型
+### 4.2 关系型数据模型
 
-#### 模板结构图
+#### 用户与权限模型
 ```mermaid
 erDiagram
-    Template ||--o{ Section : contains
-    Section ||--o{ Field : contains
-    Template {
-        string id "模板唯一标识"
-        string type "模板类型"
-        string name "模板名称"
-        string content "模板内容"
+    User ||--o{ UserRole : has
+    Role ||--o{ UserRole : contains
+    Role ||--o{ Permission : has
+    Permission ||--o{ RolePermission : belongs_to
+    
+    User {
+        int id PK "用户ID"
+        string username "用户名"
+        string password "密码"
+        string email "邮箱"
+        string phone "电话"
+        datetime created_at "创建时间"
+        datetime updated_at "更新时间"
+        boolean is_active "是否激活"
     }
-    Section {
-        string id "章节唯一标识"
-        string name "章节名称"
-        string content "章节内容"
+    
+    Role {
+        int id PK "角色ID"
+        string name "角色名称"
+        string description "角色描述"
+        datetime created_at "创建时间"
+        datetime updated_at "更新时间"
     }
-    Field {
-        string id "字段唯一标识"
-        string name "字段名称"
-        string type "字段类型"
-        string validation "验证规则"
+    
+    Permission {
+        int id PK "权限ID"
+        string name "权限名称"
+        string code "权限编码"
+        string description "权限描述"
+        datetime created_at "创建时间"
+    }
+    
+    UserRole {
+        int user_id FK "用户ID"
+        int role_id FK "角色ID"
+        datetime created_at "创建时间"
+    }
+    
+    RolePermission {
+        int role_id FK "角色ID"
+        int permission_id FK "权限ID"
+        datetime created_at "创建时间"
+    }
+```
+
+#### 文档管理模型
+```mermaid
+erDiagram
+    Document ||--o{ DocumentVersion : has
+    Document ||--o{ DocumentComment : has
+    Document ||--o{ DocumentAttachment : has
+    User ||--o{ Document : creates
+    
+    Document {
+        int id PK "文档ID"
+        string title "文档标题"
+        string type "文档类型"
+        string status "文档状态"
+        int creator_id FK "创建者ID"
+        datetime created_at "创建时间"
+        datetime updated_at "更新时间"
+    }
+    
+    DocumentVersion {
+        int id PK "版本ID"
+        int document_id FK "文档ID"
+        string version "版本号"
+        string content "文档内容"
+        datetime created_at "创建时间"
+    }
+    
+    DocumentComment {
+        int id PK "评论ID"
+        int document_id FK "文档ID"
+        int user_id FK "用户ID"
+        string content "评论内容"
+        datetime created_at "创建时间"
+    }
+    
+    DocumentAttachment {
+        int id PK "附件ID"
+        int document_id FK "文档ID"
+        string filename "文件名"
+        string filepath "文件路径"
+        string filetype "文件类型"
+        datetime created_at "创建时间"
     }
 ```
 
 #### 字段说明表
 | 实体 | 字段名 | 类型 | 业务含义 | 示例值 |
 |------|--------|------|----------|--------|
-| Template | id | string | 模板唯一标识 | "T001" |
-| Template | type | string | 模板类型 | "Bidding" |
-| Template | name | string | 模板名称 | "标准招标文件模板" |
-| Template | content | string | 模板内容 | "模板正文" |
-| Section | id | string | 章节唯一标识 | "S001" |
-| Section | name | string | 章节名称 | "项目概况" |
-| Section | content | string | 章节内容 | "章节正文" |
-| Field | id | string | 字段唯一标识 | "F001" |
-| Field | name | string | 字段名称 | "项目名称" |
-| Field | type | string | 字段类型 | "String" |
-| Field | validation | string | 验证规则 | "required" |
+| User | id | int | 用户ID | 1 |
+| User | username | string | 用户名 | "admin" |
+| User | password | string | 密码 | "hashed_password" |
+| User | email | string | 邮箱 | "admin@example.com" |
+| Role | id | int | 角色ID | 1 |
+| Role | name | string | 角色名称 | "管理员" |
+| Role | description | string | 角色描述 | "系统管理员" |
+| Permission | id | int | 权限ID | 1 |
+| Permission | name | string | 权限名称 | "查看用户" |
+| Permission | code | string | 权限编码 | "user:view" |
+| Document | id | int | 文档ID | 1 |
+| Document | title | string | 文档标题 | "招标文件" |
+| Document | type | string | 文档类型 | "bidding" |
+| Document | status | string | 文档状态 | "draft" |
+| DocumentVersion | id | int | 版本ID | 1 |
+| DocumentVersion | version | string | 版本号 | "1.0.0" |
+| DocumentVersion | content | string | 文档内容 | "文档正文" |
+
+### 4.3 数据存储策略
+
+#### 数据分布
+系统采用多级存储架构，不同类型的数据存储在不同的存储系统中。知识图谱数据存储在Neo4j中，用于存储实体关系和知识网络。用户权限数据存储在PostgreSQL中，用于存储用户、角色、权限等基础数据。文档元数据也存储在PostgreSQL中，用于存储文档基本信息、版本信息等。文档实际内容存储在阿里云OSS中，确保大文件的高效存储和访问。缓存数据存储在Redis中，用于存储会话、临时数据等。
+
+#### 数据同步策略
+系统采用多层次的同步策略，确保数据的一致性和实时性。实时同步策略应用于用户权限变更、文档状态更新、评论和附件操作等需要即时响应的场景。定时同步策略用于处理文档统计信息、用户行为分析、系统性能指标等周期性数据。异步同步策略则适用于文档内容更新、批量数据处理、日志记录等对实时性要求不高的场景。
 
 ## 5. 业务流程
 
@@ -568,25 +668,7 @@ graph TB
 ```
 
 ### 8.3 部署步骤
-1. **环境准备**
-   - 安装Docker和Docker Compose
-   - 配置Neo4j数据库
-   - 配置阿里云服务
-
-2. **应用部署**
-   - 构建Docker镜像
-   - 配置环境变量
-   - 启动应用服务
-
-3. **服务配置**
-   - 配置负载均衡
-   - 配置数据库连接
-   - 配置缓存服务
-
-4. **监控配置**
-   - 配置日志收集
-   - 配置性能监控
-   - 配置告警规则
+系统部署采用标准化的流程，确保部署过程的可控性和可重复性。环境准备阶段需要安装Docker和Docker Compose，配置Neo4j数据库，以及配置阿里云服务。应用部署阶段包括构建Docker镜像，配置环境变量，以及启动应用服务。服务配置阶段需要配置负载均衡，配置数据库连接，以及配置缓存服务。监控配置阶段则包括配置日志收集，配置性能监控，以及配置告警规则。
 
 ## 9. 前端设计
 
